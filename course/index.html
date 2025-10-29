@@ -76,29 +76,5 @@
 		})());
     </script>
 
-	<script>
-(function () {
-  // Пытаемся найти и нажать "Play" в плеере iSpring
-  function tryStart() {
-    var btn = document.querySelector(
-      'button[aria-label="Play"], .presentation-play-button, .controls__button, button'
-    );
-    if (btn && getComputedStyle(btn).display !== 'none' && btn.offsetParent !== null) {
-      btn.click();
-      return true;
-    }
-    return false;
-  }
-
-  // 1) Первая попытка после небольшой паузы
-  setTimeout(tryStart, 400);
-
-  // 2) Подстраховка: следим за появлением узлов до успешного старта
-  var mo = new MutationObserver(function () {
-    if (tryStart()) mo.disconnect();
-  });
-  mo.observe(document.documentElement, { childList: true, subtree: true });
-})();
-</script>
 </body>
 </html>
